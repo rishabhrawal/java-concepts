@@ -29,4 +29,7 @@ public class Demo {
             .thenComparing(p->p.getName())
             .thenComparing(p->p.hashCode());
 
+    Comparator<Person> comp = Comparator.comparing((Person p)->p.getAge())
+            .thenComparing(p->p.getName());
+
 }

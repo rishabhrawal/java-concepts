@@ -56,9 +56,10 @@ public class ArrayDemo {
         Person p1 = new Person("Saurabh", 22);
         Person p2 = new Person("Jadoo", 99);
         List<Person> personList = Arrays.asList(new Person[] {p1,p2});
+        //Java 9+  List<Person>  personList2 = List.of(p1, p2);
 
-        //Java 9
-        //List<Person>  personList2 = List.of(p1, p2);
+
+
 
     }
 }

@@ -42,7 +42,7 @@ public class StreamCreation {
         return Arrays.stream(arr);
     }
 
-    /******************************************* ThreadLocalRandom *****************************/
+    /******************************************* Stream of random numbers (ThreadLocalRandom) *****************************/
     public static void random(){
         IntStream stream = ThreadLocalRandom.current().ints();
     }

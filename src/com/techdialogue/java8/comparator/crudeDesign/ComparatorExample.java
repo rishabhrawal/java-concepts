@@ -1,4 +1,4 @@
-package com.techdialogue.java8.lamdaapi.comparison;
+package com.techdialogue.java8.comparator.crudeDesign;
 
 import java.util.function.Function;
 

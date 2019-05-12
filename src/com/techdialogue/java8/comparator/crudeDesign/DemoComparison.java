@@ -1,4 +1,4 @@
-package com.techdialogue.java8.lamdaapi.comparison;
+package com.techdialogue.java8.comparator.crudeDesign;
 
 import com.techdialogue.Person;
 
@@ -39,7 +39,7 @@ public class DemoComparison {
         //we can simplify it further by using a method reference
         newComparatorName = Comparator.comparing(Person::getName);
 
-        //chaining comparators, fallback to name comparison if ages are same
+        //chaining comparators, fallback to name crudeDesign if ages are same
         Comparator<Person> cmp =  newComparatorAge.thenComparing(newComparatorName);
 
 

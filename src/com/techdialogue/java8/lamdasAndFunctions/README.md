@@ -1,5 +1,5 @@
 Functional Interface ==> any Interface that has only one abstract function is known as a functional interface
-<br>This interface can exist freely and passes around as long as it belongs to one of the Types defined in java.util.function
+<br>This interface can exist freely and can be passed around as long as it belongs to one of the Types defined in java.util.function
 
 <br>Lambda Expression ==> 
 

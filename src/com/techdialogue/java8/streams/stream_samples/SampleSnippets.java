@@ -18,12 +18,13 @@ public class SampleSnippets {
         List<Integer> list = Arrays.asList(1,2,3,4,5,6);
         linearSearch(list,100);
 
-        reverseString("player");
+        String reversed = reverseString("player");
+        System.out.println("Reversed :"+reversed);
 
-        System.out.println(Character.toChars(2579809));
+        System.out.println(Character.toChars(49));
     }
 
-    /** Iterate over n numbers **/
+    /** Iterate n times **/
     public static void iterate(int n){
         Stream.iterate(1, i->i+1)
                 .limit(n)
@@ -84,7 +85,7 @@ public class SampleSnippets {
         return o.isPresent();
     }
 
-    /** reverse a String using Stream */
+    /** reverse a String using Stream not working */
     public  static String reverseString(String str){
         return str.chars() //IntStream
                 .sorted()
