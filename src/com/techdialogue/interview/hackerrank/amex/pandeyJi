@@ -1,0 +1,116 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+public class CoinCounting {
+	
+    // to store coin values
+    static List<Integer> coinvalues;
+    // to store coin sums
+    static List<Integer> arr_sumofcoins;
+    // to iterate and remove from the arr object
+    static Iterator<Integer> iterator;
+
+    // to store monetary value to reach
+    static int mv;
+    // to track the sum in edge cases
+    static int bigNumSum = 0;
+    public static void main(String[] args) {
+        // to populate ArrayList with coin figures
+        List<Integer> myList = new ArrayList<Integer>();
+        myList.add(20);
+        myList.add(10);
+        myList.add(5);
+        myList.add(1);
+
+        // to call the method that sorts the array and triggers the recursion
+        System.out.println(count_coins(myList, 53));
+    }
+
+    /**
+     * Method that sorts the ArrayList and populates the fields to be used in the recursion
+     * @param coinDenominations
+     * @param monetaryValue
+     * @return
+     */
+    static List<Integer> count_coins(List<Integer> coinDenominations, int monetaryValue) {
+
+        // to sort and reverse from biggest to smallest
+        Collections.sort(coinDenominations);
+        Collections.reverse(coinDenominations);
+
+        // to populate the static fields
+        coinvalues = new ArrayList<>(coinDenominations);
+        arr_sumofcoins = new ArrayList<Integer>();
+        mv = monetaryValue;
+
+        // returning recursion
+        return getCombinationOfCoins(0, 0, 0);
+    }
+
+    
+    /**
+     * Recursion method that finds the shortest combination of coins to reach
+     * a given value, if there is any.
+     * @param sum
+     * @param i
+     * @param p
+     * @return
+     */
+    public static List<Integer> getCombinationOfCoins(int sum, int i, int p) {
+
+    	System.out.println("Sum:"+sum+" : "+i +" : "+p);
+        // successful case! Sequence of coins is found
+        if (sum == mv) return arr_sumofcoins;
+
+        // to reshape the candidate coins when they overflow
+        if (sum > mv) {
+
+            // unsuccessful case! Coins do not sum up to given value
+        	System.out.println(">"+p+">> coinvalues"+coinvalues.size());
+            if (p == coinvalues.size() - 1) {
+            	arr_sumofcoins.clear();
+                arr_sumofcoins.add(0);
+                return arr_sumofcoins;
+            }
+            // to reset the candidates to the next biggest value after hitting
+            // the lowest possible sum with previous candidates
+            else if (i == coinvalues.size() - 1) {
+
+                int temp = arr_sumofcoins.remove(0);
+
+                bigNumSum -= temp;
+                sum = bigNumSum;
+                iterator = arr_sumofcoins.iterator();
+
+                // to delete all candidates different from biggest value
+                while (iterator.hasNext()) {
+                    Integer a = iterator.next();
+                    if (a != temp) iterator.remove();
+                }
+
+                // to check whether a number was completely consumed or not
+                if (arr_sumofcoins.size() == 0) {
+                    p++;
+                    return getCombinationOfCoins(sum, p, p);
+                } else {
+                    return getCombinationOfCoins(sum, p + 1, p);
+                }
+            }
+            // base case overflow: to delete latest added number and adding the next smaller one
+            else {
+                if (i == p) bigNumSum -= coinvalues.get(i);
+                sum -= arr_sumofcoins.remove(arr_sumofcoins.size() - 1);
+                return getCombinationOfCoins(sum, ++i, p);
+            }
+        }
+        // base case addition: to add a number and push it into the candidates array
+        else {
+            if (p == i) bigNumSum += coinvalues.get(i);
+            sum += coinvalues.get(i);
+            arr_sumofcoins.add(coinvalues.get(i));
+            return getCombinationOfCoins(sum, i, p);
+        }
+    }
+}
